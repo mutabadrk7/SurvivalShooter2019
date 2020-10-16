@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public Slider healthSlider;
     public Image damageImage;
     public AudioClip deathClip;
+    public AudioClip panicClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
@@ -44,6 +45,18 @@ public class PlayerHealth : MonoBehaviour
             damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
+        while(currentHealth <= startingHealth/4)
+        {
+            playerAudio.clip = panicClip;
+            playerAudio.Play();
+            damageImage.color = flashColour;
+            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed/2 * Time.deltaTime);
+
+        }
+        if (currentHealth == 0)
+        {
+            damageImage.color = flashColour;
+        }
     }
 
 

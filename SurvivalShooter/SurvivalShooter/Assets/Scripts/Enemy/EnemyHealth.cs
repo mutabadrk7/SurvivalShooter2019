@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.UI;
 public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
@@ -16,6 +16,8 @@ public class EnemyHealth : MonoBehaviour
     bool isDead;
     bool isSinking;
 
+    [SerializeField]
+    Image bar;
 
     void Awake ()
     {
@@ -25,6 +27,7 @@ public class EnemyHealth : MonoBehaviour
         capsuleCollider = GetComponent <CapsuleCollider> ();
 
         currentHealth = startingHealth;
+        UpdateHud();
     }
 
 
@@ -32,6 +35,7 @@ public class EnemyHealth : MonoBehaviour
     {
         if(isSinking)
         {
+           
             transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
         }
     }
@@ -43,14 +47,17 @@ public class EnemyHealth : MonoBehaviour
             return;
 
         enemyAudio.Play ();
-
+        
         currentHealth -= amount;
             
         hitParticles.transform.position = hitPoint;
         hitParticles.Play();
+        UpdateHud();
 
-        if(currentHealth <= 0)
+
+        if (currentHealth <= 0)
         {
+            transform.Translate(-Vector3.forward );
             Death ();
         }
     }
@@ -76,5 +83,10 @@ public class EnemyHealth : MonoBehaviour
         isSinking = true;
         ScoreManager.score += scoreValue;
         Destroy (gameObject, 2f);
+    }
+
+    void UpdateHud()
+    {
+        bar.fillAmount = (float)currentHealth / startingHealth;
     }
 }
