@@ -45,10 +45,14 @@ public class PlayerHealth : MonoBehaviour
             damageImage.color = Color.Lerp (damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
         }
         damaged = false;
-        while(currentHealth <= startingHealth/4)
+        if (currentHealth <= startingHealth / 4 && currentHealth > 0)
         {
             playerAudio.clip = panicClip;
             playerAudio.Play();
+        }
+       if(currentHealth <= startingHealth/4 && currentHealth > 0)
+        {
+           
             damageImage.color = flashColour;
             damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed/2 * Time.deltaTime);
 
