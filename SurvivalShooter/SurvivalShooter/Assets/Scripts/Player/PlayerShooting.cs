@@ -16,6 +16,8 @@ public class PlayerShooting : MonoBehaviour
     AudioSource gunAudio;
     Light gunLight;
     float effectsDisplayTime = 0.2f;
+    [SerializeField]
+    int playerIndex = 1;
 
 
     void Awake ()
@@ -32,7 +34,7 @@ public class PlayerShooting : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-		if(Input.GetButton ("Fire1") && timer >= timeBetweenBullets && Time.timeScale != 0)
+		if(Input.GetButton ("Fire"+ playerIndex) && timer >= timeBetweenBullets && Time.timeScale != 0)
         {
             Shoot ();
         }

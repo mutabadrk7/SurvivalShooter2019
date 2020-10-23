@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     PlayerShooting playerShooting;
     bool isDead;
     bool damaged;
-
+    int deathcount = 0;
 
     void Awake ()
     {
