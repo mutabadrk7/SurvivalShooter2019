@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    public void TakeDamage (int amount)
+    public void TakeDamage (int player,int amount)
     {
         damaged = true;
 

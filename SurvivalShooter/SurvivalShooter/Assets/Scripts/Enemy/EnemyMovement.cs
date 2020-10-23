@@ -21,19 +21,30 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-    void Update ()
+    void Update()
     {
-        
+        int playercount = GameObject.;
 
-        if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
         {
-            if ( player.position.magnitude > player2.position.magnitude  )
-            {
-                nav.SetDestination(player2.position);
-            }
-            else { nav.SetDestination (player.position);}
-            
-        }
+            //switch (playercount)
+            //{
+
+            //    default:
+
+
+            //    //case playercount > 1:
+            //    //    {
+            //    //        if (player.position.magnitude > player2.position.magnitude)
+            //    //        {
+            //    //            nav.SetDestination(player2.position);
+            //    //        }
+            //    //        else { nav.SetDestination(player.position); }
+            //    //    }
+
+            //}
+         }
+    
         else
         {
             nav.enabled = false;

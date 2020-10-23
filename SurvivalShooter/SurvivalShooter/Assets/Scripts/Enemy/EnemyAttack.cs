@@ -29,6 +29,7 @@ public class EnemyAttack : MonoBehaviour
         if(other.gameObject == player)
         {
             playerInRange = true;
+
         }
     }
 
@@ -64,7 +65,7 @@ public class EnemyAttack : MonoBehaviour
 
         if(playerHealth.currentHealth > 0)
         {
-            playerHealth.TakeDamage (attackDamage);
+           playerHealth.TakeDamage (attackDamage);
         }
     }
 }
