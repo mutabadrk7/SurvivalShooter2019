@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
     public float timeBetweenAttacks = 0.5f;
     public int attackDamage = 10;
 
-
+    GameObject[] players;
     Animator anim;
     GameObject player;
     PlayerHealth playerHealth;
@@ -17,7 +17,8 @@ public class EnemyAttack : MonoBehaviour
 
     void Awake ()
     {
-        player = GameObject.FindGameObjectWithTag ("Player" );
+       // player = GameObject.FindGameObjectWithTag ("Player" );
+        players = GameObject.FindGameObjectsWithTag("Player");
         playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent <Animator> ();
@@ -26,18 +27,32 @@ public class EnemyAttack : MonoBehaviour
 
     void OnTriggerEnter (Collider other)
     {
-        if(other.gameObject == player)
+        if(other.gameObject.CompareTag("Player"))
         {
             playerInRange = true;
-
+            players = GameObject.FindGameObjectsWithTag("Player");
+            if (players[0].transform.position.magnitude > players[1].transform.position.magnitude)
+            {
+                player = players[1];
+            }
+            else { player = players[0]; }
+            playerHealth = player.GetComponent<PlayerHealth>();
+           // Update();
         }
     }
 
 
     void OnTriggerExit (Collider other)
     {
-        if(other.gameObject == player)
+        if(other.gameObject.CompareTag("Player"))
         {
+            
+            //if (players[0].transform.position.magnitude > players[1].transform.position.magnitude)
+            //{
+            //    player = players[1];
+            //}
+            //else { player = players[0]; }
+            playerHealth = player.GetComponent<PlayerHealth>();
             playerInRange = false;
         }
     }
@@ -47,7 +62,9 @@ public class EnemyAttack : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
+        enemyHealth = GetComponent<EnemyHealth>();
+
+        if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
         {
             Attack ();
         }
@@ -56,6 +73,8 @@ public class EnemyAttack : MonoBehaviour
         {
             anim.SetTrigger ("PlayerDead");
         }
+
+
     }
 
 
