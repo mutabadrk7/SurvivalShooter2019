@@ -6,7 +6,7 @@ public class EnemyAttack : MonoBehaviour
     public float timeBetweenAttacks = 0.5f;
     public int attackDamage = 10;
 
-    GameObject[] players;
+    public GameObject[] players;
     Animator anim;
     GameObject player;
     PlayerHealth playerHealth;
@@ -17,7 +17,7 @@ public class EnemyAttack : MonoBehaviour
 
     void Awake ()
     {
-       // player = GameObject.FindGameObjectWithTag ("Player" );
+        player = GameObject.FindGameObjectWithTag ("Player" );
         players = GameObject.FindGameObjectsWithTag("Player");
         playerHealth = player.GetComponent <PlayerHealth> ();
         enemyHealth = GetComponent<EnemyHealth>();
@@ -47,11 +47,11 @@ public class EnemyAttack : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             
-            //if (players[0].transform.position.magnitude > players[1].transform.position.magnitude)
-            //{
-            //    player = players[1];
-            //}
-            //else { player = players[0]; }
+            if (players[0].transform.position.magnitude > players[1].transform.position.magnitude)
+            {
+                player = players[1];
+            }
+            else { player = players[0]; }
             playerHealth = player.GetComponent<PlayerHealth>();
             playerInRange = false;
         }
@@ -66,7 +66,7 @@ public class EnemyAttack : MonoBehaviour
 
         if (timer >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
         {
-            Attack ();
+           Attack(player);
         }
 
         if(playerHealth.currentHealth <= 0)
@@ -78,7 +78,7 @@ public class EnemyAttack : MonoBehaviour
     }
 
 
-    void Attack ()
+    void Attack (GameObject player)
     {
         timer = 0f;
 

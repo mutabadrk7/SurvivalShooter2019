@@ -14,7 +14,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip panicClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-
+    
 
     Animator anim;
     AudioSource playerAudio;
@@ -22,7 +22,7 @@ public class PlayerHealth : MonoBehaviour
     PlayerShooting playerShooting;
     bool isDead;
     bool damaged;
-    int deathcount = 0;
+    public int deathcount;
 
     void Awake ()
     {
@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
         playerMovement = GetComponent <PlayerMovement> ();
         playerShooting = GetComponentInChildren <PlayerShooting> ();
         currentHealth = startingHealth;
+        
     }
 
 
@@ -94,11 +95,20 @@ public class PlayerHealth : MonoBehaviour
 
         playerMovement.enabled = false;
         playerShooting.enabled = false;
+
+        
+        Destroy(gameObject, 2f);
+
+        AddtoDeathCount()
     }
 
 
     public void RestartLevel ()
     {
-        SceneManager.LoadScene (0);
+        
+        
+            SceneManager.LoadScene (0);
+        
+        
     }
 }
