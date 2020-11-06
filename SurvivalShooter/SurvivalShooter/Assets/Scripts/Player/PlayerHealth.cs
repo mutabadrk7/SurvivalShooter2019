@@ -99,7 +99,7 @@ public class PlayerHealth : MonoBehaviour
         
         Destroy(gameObject, 2f);
 
-        AddtoDeathCount()
+        //AddtoDeathCount();
     }
 
 
